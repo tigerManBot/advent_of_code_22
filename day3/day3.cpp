@@ -155,7 +155,7 @@ void process_command_line(int argc, char* argv[])
 	if (argc < 2)
 	{
 		std::cout << "Error: Must include command line argument to indicate which file to run.\n";
-		std::cout << "1: will read the smaller file, anything else will read the bigger file\n\n";
+		std::cout << "An argument of '1' will read the smaller file, anything else will read the bigger file\n\n";
 		exit(1);
 	}
 }
