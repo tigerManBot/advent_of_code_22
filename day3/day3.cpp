@@ -9,18 +9,17 @@
 #include <set>
 #include <algorithm>
 
-
+void process_command_line(int argc, char* argv[]);
 std::vector<std::string> read_rucksacks(const char*);
 std::unordered_map<char, int> get_letter_map();
-
 
 int main(int argc, char* argv[])
 {
 	std::cout << '\n';
-
-	std::vector<std::string> rucksacks = read_rucksacks(argv[1]);
+	process_command_line(argc, argv);
 	
 	//PART ONE: 
+	std::vector<std::string> rucksacks = read_rucksacks(argv[1]);
 
 	//vars for breaking the string into two parts
 	int half_size;
@@ -111,7 +110,7 @@ std::vector<std::string> read_rucksacks(const char* which_file)
 	in_file.open(filename);
 	if (!in_file)
 	{
-		std::cout << "Error with file read.\nFile: " << filename << "\n";
+		std::cout << "\nError with file read.\nFile: " << filename << "\n";
 		exit(1);
 	}
 
@@ -149,4 +148,14 @@ std::unordered_map<char, int> get_letter_map()
 	}
 
 	return letter_map;
+}
+
+void process_command_line(int argc, char* argv[])
+{
+	if (argc < 2)
+	{
+		std::cout << "Error: Must include command line argument to indicate which file to run.\n";
+		std::cout << "1: will read the smaller file, anything else will read the bigger file\n\n";
+		exit(1);
+	}
 }
