@@ -22,10 +22,8 @@ int main(int argc, char* argv[])
 
 	//vars for breaking the string into two parts
 	int half_size;
-	std::string first_compartment, second_compartment;
-
-	std::vector<char> priority_tracker;
-	std::unordered_map<char, int> str_tracker;
+	std::string first_compartment, second_compartment;	//two halves of the main string
+	std::vector<char> priority_for_each_rucksack;
 	
 	for (auto& str : rucksacks)
 	{	
@@ -34,29 +32,31 @@ int main(int argc, char* argv[])
 		first_compartment = str.substr(0, half_size);
 		second_compartment = str.substr(first_compartment.length(), half_size);
 		
+		bool common_found = false;
 		for (int i = 0; i < half_size; i++)
 		{
-			str_tracker[first_compartment[i]]++;
-		}
-
-		//look for the duplicate character in the second string
-		for (auto& current_char : second_compartment)
-		{
-			auto search = str_tracker.find(current_char);
-			if (search != str_tracker.end())
+			if (common_found)
 			{
-				priority_tracker.push_back(current_char);
 				break;
 			}
-		}
 
-		str_tracker.clear();
+			//look for the dupliacte
+			for (int j = 0; j < half_size; j++)
+			{
+				if (first_compartment[i] == second_compartment [j])
+				{
+					priority_for_each_rucksack.push_back(first_compartment[i]);
+					common_found = true;
+					break;
+				}
+			}
+		}
 	}
 
 	//now calculate the sum
 	std::unordered_map<char, int> letter_map = get_letter_map();	//points guide for each character
 	int sum = 0;
-	for (auto& i : priority_tracker)
+	for (auto& i : priority_for_each_rucksack)
 	{
 		sum += letter_map[i];
 	}
