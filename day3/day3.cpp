@@ -1,4 +1,6 @@
 //Challenge instructions: https://adventofcode.com/2022/day/3
+
+//run with command line arguemnt: 1   to read from the smaller file, anything else will read from the bigger input file
 #include <iostream>
 #include <vector>
 #include <fstream>
