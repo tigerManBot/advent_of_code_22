@@ -68,19 +68,19 @@ int main(int argc, char* argv[])
 	{
 		std::set<char> first, second, third;
 
-		for (auto& current : rucksacks[i])
+		for (auto& current_char : rucksacks[i])
 		{
-			first.insert(current);
+			first.insert(current_char);
 		}
 
-		for (auto& current : rucksacks[i + 1])
+		for (auto& current_char : rucksacks[i + 1])
 		{
-			second.insert(current);
+			second.insert(current_char);
 		}
 
-		for (auto& current : rucksacks[i + 2])
+		for (auto& current_char : rucksacks[i + 2])
 		{
-			third.insert(current);
+			third.insert(current_char);
 		}
 		
 		std::set<char> common;
@@ -127,6 +127,7 @@ std::vector<std::string> read_rucksacks(const char* which_file)
 
 }
 
+//makes it much easier to calcualte the priority value for any individual character
 std::unordered_map<char, int> get_letter_map()
 {
 	std::unordered_map<char, int> letter_map;
