@@ -123,6 +123,7 @@ std::vector<std::string> read_rucksacks(const char* which_file)
 		}
 	}
 
+	in_file.close();
 	return rucksacks;
 
 }
