@@ -1,3 +1,4 @@
+//Challenge instructions: https://adventofcode.com/2022/day/3
 #include <iostream>
 #include <vector>
 #include <fstream>
