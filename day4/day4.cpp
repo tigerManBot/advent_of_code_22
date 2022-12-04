@@ -35,14 +35,15 @@ public:
 	}
 };
 
-std::vector<Elf_Pair> read_pairs(const char*);
+std::vector<Elf_Pair> read_pairs(const char*&);
 const char* process_command_line(int, const char*);
 
 int main(int argc, char* argv[])
 {
 	std::cout << '\n';
 
-	std::vector<Elf_Pair> elf_pairs = read_pairs( process_command_line(argc, argv[1]) );
+	const char* filename = process_command_line(argc, argv[1]);
+	std::vector<Elf_Pair> elf_pairs = read_pairs(filename);
 
 	//Both
 	int fully_contained_counter = 0;
@@ -59,15 +60,15 @@ int main(int argc, char* argv[])
 			overlap_counter++;
 		}
 	}
+	
 	std::cout << "Part one: " << fully_contained_counter << "\n";
 	std::cout << "Part two: " << overlap_counter << "\n";
 
-	
 	std::cout << '\n';
 	return 0;
 }
 
-std::vector<Elf_Pair> read_pairs(const char* filename)
+std::vector<Elf_Pair> read_pairs(const char*& filename)
 {
 	std::ifstream in_file;
 	in_file.open(filename);
@@ -109,6 +110,6 @@ const char* process_command_line(int argc, const char* argument)
 		std::cout << "An argument of '1' will read the smaller file, anything else will read the bigger file\n\n";
 		exit(1);
 	}
-
-	return (*argument == '1') ? "small.txt" : "big.txt"; 
+  
+	return (*argument == '1') ? "small.txt" : "big.txt";
 }
