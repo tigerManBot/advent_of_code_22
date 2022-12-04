@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
 	//vars for breaking the string into two parts
 	int half_size;
 	std::string first_compartment, second_compartment;	//two halves of the main string
-	std::vector<char> priority_for_each_rucksack;
+	std::vector<char> priorites;
 	
 	for (auto& str : rucksacks)
 	{	
@@ -33,31 +33,22 @@ int main(int argc, char* argv[])
 		first_compartment = str.substr(0, half_size);
 		second_compartment = str.substr(first_compartment.length(), half_size);
 		
-		bool common_found = false;
 		for (int i = 0; i < half_size; i++)
 		{
-			if (common_found)
+			//std::string::npos is sort of like "end" in a map search
+			if (first_compartment.find(second_compartment[i]) != std::string::npos)
 			{
+				priorites.push_back(second_compartment[i]);
 				break;
 			}
-
-			//look for the dupliacte
-			for (int j = 0; j < half_size; j++)
-			{
-				if (first_compartment[i] == second_compartment [j])
-				{
-					priority_for_each_rucksack.push_back(first_compartment[i]);
-					common_found = true;
-					break;
-				}
-			}
 		}
+
 	}
 
 	//now calculate the sum
 	std::unordered_map<char, int> letter_map = get_letter_map();	//points guide for each character
 	int sum = 0;
-	for (auto& i : priority_for_each_rucksack)
+	for (auto& i : priorites)
 	{
 		sum += letter_map[i];
 	}
