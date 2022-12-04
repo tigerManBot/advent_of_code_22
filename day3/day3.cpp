@@ -21,11 +21,13 @@ int main(int argc, char* argv[])
 	//PART ONE: 
 	std::vector<std::string> rucksacks = read_rucksacks(argv[1]);
 
+	std::unordered_map<char, int> letter_map = get_letter_map();	//points guide for each character
+	
 	//vars for breaking the string into two parts
 	int half_size;
 	std::string first_compartment, second_compartment;	//two halves of the main string
-	std::vector<char> priorites;
-	
+	int sum = 0;
+
 	for (auto& str : rucksacks)
 	{	
 		//divide the current string into two halves
@@ -38,20 +40,13 @@ int main(int argc, char* argv[])
 			//std::string::npos is sort of like "end" in a map search
 			if (first_compartment.find(second_compartment[i]) != std::string::npos)
 			{
-				priorites.push_back(second_compartment[i]);
+				sum += letter_map[second_compartment[i]];
 				break;
 			}
 		}
 
 	}
 
-	//now calculate the sum
-	std::unordered_map<char, int> letter_map = get_letter_map();	//points guide for each character
-	int sum = 0;
-	for (auto& i : priorites)
-	{
-		sum += letter_map[i];
-	}
 	std::cout << "sum: " << sum << "\n";
 
 	//PART TWO
