@@ -21,9 +21,6 @@ public:
 		second_upper = s_upper;
 	}
 
-	int get_lower() { return first_lower; }
-	int get_upper() { return first_upper; }
-
 	bool is_fully_contained()
 	{
 		bool first_contains_second = first_lower <= second_lower && first_upper >= second_upper;
